@@ -1,8 +1,8 @@
-# Spring boot - Todolist Project 
+#  :notebook:Spring boot - Todolist Project 
 
-투두리스트 프로젝트
+Spring boot & Vue 기반 투두리스트 프로젝트
 
-## Requirements
+## :warning:Requirements
 
 * Open JDK 17
 * Gradle v8.5
@@ -11,7 +11,7 @@
 * use JPA
 * use `mariadb` database 
 
-### install
+### :computer:install
 ```bash
 $ git clone git@github.com:seilyn/todolist.git
 
@@ -20,14 +20,14 @@ or
 $ git clone https://github.com/seilyn/todolist.git
 ```
 
-### run
+### :fire:run
 run with `gradle`
 
 ```bash
 $ gradlew build 
 ```
 
-## mission
+## :key:mission
 - JWT 적용
 - 샘플 RESTful API 구성
   - 유저 추가
@@ -36,7 +36,7 @@ $ gradlew build
 - CORS
   
  
-## Doing
+## :clock1:Doing
 - 유저 회원가입 적용
 
-## Done
+## :heavy_check_mark:Done
