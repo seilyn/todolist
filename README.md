@@ -37,6 +37,9 @@ $ gradlew build
   
  
 ## :clock1:Doing
-- 유저 회원가입 적용
+### 2024.02.28 
+  - 유저 회원가입 적용
+### 2024.03.01
+  - 유저 회원가입 컨트롤러 구현  
 
 ## :heavy_check_mark:Done
