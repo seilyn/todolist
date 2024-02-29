@@ -14,6 +14,7 @@ public class Request {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class SignUp{
+
         @NotNull
         @Size(min = 3, max = 50)
         private String username;
