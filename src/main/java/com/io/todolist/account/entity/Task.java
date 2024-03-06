@@ -26,14 +26,14 @@ public class Task {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    private Users user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mate_id")
     private Mate mate;
 
     @Builder
-    public Task(Long id, String title, String contents, Boolean isCompleted, User user, LocalDateTime deadline) {
+    public Task(Long id, String title, String contents, Boolean isCompleted, Users user, LocalDateTime deadline) {
         this.id = id;
         this.title = title;
         this.contents = contents;

@@ -4,11 +4,15 @@ import com.io.todolist.account.dto.Request;
 import com.io.todolist.account.dto.Response;
 import com.io.todolist.account.repository.UserRepository;
 import com.io.todolist.account.service.UserService;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -16,6 +20,7 @@ import static org.mockito.Mockito.when;
 
 
 @SpringBootTest
+@ExtendWith(SpringExtension.class)
 class UserServiceImplTest {
 
     @Autowired
@@ -24,7 +29,6 @@ class UserServiceImplTest {
     @Autowired
     private UserRepository userRepository;
 
-
     @Test
     @DisplayName("유저 회원가입 테스트")
     public void UserSignUp_Test() {
@@ -32,7 +36,7 @@ class UserServiceImplTest {
         Given
          */
         Request.SignUp request = Request.SignUp.builder()
-                .username("testuser")
+                .username("testuser1")
                 .nickname("test")
                 .password("test")
                 .emailAddress("test@test.com")
@@ -54,6 +58,20 @@ class UserServiceImplTest {
     @DisplayName("유저 회원가입 컨트롤러 테스트")
     public void UserSignUp_Controller_Test() throws Exception{
 
+    }
+
+    @Test
+    @DisplayName("유저 로그인 성공 테스트")
+    public void UserLogin_Test() {
+        UserSignUp_Test();
+        Request.Login request = Request.Login.builder()
+                .userName("testuser")
+                .password("test")
+                .build();
+
+        Response.Login response = userService.logIn(request);
+
+        assertThat(response.getUserName()).isEqualTo(request.getUserName());
     }
 
 

@@ -1,6 +1,6 @@
 package com.io.todolist.account.dto;
 
-import com.io.todolist.account.entity.User;
+import com.io.todolist.account.entity.Users;
 import lombok.Builder;
 import lombok.Data;
 
@@ -14,7 +14,7 @@ public class Response {
 
         private String emailAddress;
 
-        public static Response.UserInfo of(User user) {
+        public static Response.UserInfo of(Users user) {
             if (user == null) {
                 return null;
             }
@@ -25,5 +25,14 @@ public class Response {
                     .emailAddress(user.getEmailAddress())
                     .build();
         }
+    }
+
+    /**
+     * 임시
+     */
+    @Builder
+    @Data
+    public static class Login {
+        private String userName;
     }
 }

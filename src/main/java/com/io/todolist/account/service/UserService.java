@@ -5,4 +5,6 @@ import com.io.todolist.account.dto.Response;
 
 public interface UserService {
     Response.UserInfo signup(Request.SignUp request);
+
+    Response.Login logIn(Request.Login request);
 }

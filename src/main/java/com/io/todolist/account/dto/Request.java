@@ -30,4 +30,29 @@ public class Request {
         @NotNull
         private String emailAddress;
     }
+
+    @Builder
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Login {
+        @NotNull
+        private String userName;
+
+        @NotNull
+        private String password;
+
+    }
+
+    /**
+     * 유저 이름을 가지고 와서 Mate 그룹을 만듬.
+     */
+    @Builder
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Mate {
+        @NotNull
+        private String userName;
+    }
 }

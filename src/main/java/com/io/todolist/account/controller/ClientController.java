@@ -20,6 +20,11 @@ public class ClientController {
         this.userService = userService;
     }
 
+    /**
+     * 유저 회원가입
+     * @param request
+     * @return
+     */
     @PostMapping("/users")
     public ResponseEntity<CommonResponse> signup(@RequestBody Request.SignUp request) {
         Response.UserInfo userInfo = userService.signup(request);
@@ -27,6 +32,23 @@ public class ClientController {
         CommonResponse response = CommonResponse.builder()
                 .success(true)
                 .response(userInfo)
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * 유저 로그인
+     * @param request
+     * @return
+     */
+    @PostMapping("/login")
+    public ResponseEntity<CommonResponse> login(@RequestBody Request.Login request) {
+        Response.Login loginInfo = userService.logIn(request);
+
+        CommonResponse response =CommonResponse.builder()
+                .success(true)
+                .response(loginInfo)
                 .build();
 
         return ResponseEntity.ok(response);

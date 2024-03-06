@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User {
+public class Users {
     @Id
     @GeneratedValue
     private Long id;
@@ -35,7 +35,7 @@ public class User {
     private List<Task> taskList;
 
     @Builder
-    public User(String userName, String password, String emailAddress, String nickname) {
+    public Users(String userName, String password, String emailAddress, String nickname) {
         this.userName = userName;
         this.password = password;
         this.emailAddress = emailAddress;
