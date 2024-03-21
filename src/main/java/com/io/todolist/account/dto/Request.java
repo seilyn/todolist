@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
+import java.util.UUID;
 
 public class Request {
     @Builder
@@ -42,6 +44,15 @@ public class Request {
         @NotNull
         private String password;
 
+    }
+
+    @Builder
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class Refresh {
+        @NotNull
+        private String userName;
     }
 
     /**

@@ -4,24 +4,23 @@ import com.io.todolist.account.dto.Request;
 import com.io.todolist.account.dto.Response;
 import com.io.todolist.account.repository.UserRepository;
 import com.io.todolist.account.service.UserService;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
+import static org.junit.jupiter.api.MethodOrderer.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
-class UserServiceImplTest {
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+class UserIntegrationTest {
 
     @Autowired
     private UserService userService;
@@ -31,6 +30,7 @@ class UserServiceImplTest {
 
     @Test
     @DisplayName("유저 회원가입 테스트")
+    @Order(1)
     public void UserSignUp_Test() {
         /*
         Given
@@ -54,18 +54,13 @@ class UserServiceImplTest {
         assertThat(response.getEmailAddress()).isEqualTo(request.getEmailAddress());
     }
 
-    @Test
-    @DisplayName("유저 회원가입 컨트롤러 테스트")
-    public void UserSignUp_Controller_Test() throws Exception{
-
-    }
 
     @Test
     @DisplayName("유저 로그인 성공 테스트")
+    @Order(2)
     public void UserLogin_Test() {
-        UserSignUp_Test();
         Request.Login request = Request.Login.builder()
-                .userName("testuser")
+                .userName("testuser1")
                 .password("test")
                 .build();
 

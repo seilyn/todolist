@@ -33,6 +33,15 @@ public class Response {
     @Builder
     @Data
     public static class Login {
+
         private String userName;
     }
+
+    @Builder
+    @Data
+    public static class AuthKeyInfo {
+        private String authKey;
+    }
+
+
 }

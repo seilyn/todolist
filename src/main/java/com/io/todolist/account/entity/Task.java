@@ -11,8 +11,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Task {
 
-    @Id @GeneratedValue
-    private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long task_id;
 
     @Column(nullable = false, length = 20)
     private String title;
@@ -33,8 +34,7 @@ public class Task {
     private Mate mate;
 
     @Builder
-    public Task(Long id, String title, String contents, Boolean isCompleted, Users user, LocalDateTime deadline) {
-        this.id = id;
+    public Task( String title, String contents, Boolean isCompleted, Users user, LocalDateTime deadline) {
         this.title = title;
         this.contents = contents;
         this.isCompleted = isCompleted;

@@ -13,6 +13,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.NoSuchElementException;
+import java.util.UUID;
+
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
@@ -48,6 +52,8 @@ public class UserServiceImpl implements UserService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .emailAddress(request.getEmailAddress())
                 .nickname(request.getNickname())
+                .joinedDate(new Date())
+                .authKey(UUID.randomUUID().toString())
                 .build();
 
         log.info(request.getUsername(),
@@ -69,13 +75,12 @@ public class UserServiceImpl implements UserService {
     public Response.Login logIn(Request.Login request) {
          Users findUser = userRepository.findByUserName(request.getUserName());
 
-        System.out.println(findUser.getUserName());
-
-         if (findUser == null) {
+         if (findUser.getUserName() == null) {
              log.error("아이디나 비밀번호가 맞지 않습니다.");
              return null;
          }
-         if (!findUser.getPassword().equals(request.getUserName())) {
+         if (!passwordEncoder.matches(request.getPassword(), findUser.getPassword())) {
+
              log.error("아이디나 비밀번호가 맞지 않습니다.");
              return null;
          }
@@ -86,5 +91,27 @@ public class UserServiceImpl implements UserService {
 
          return login;
     }
+
+    @Override
+    @Transactional
+    public Response.AuthKeyInfo refreshAuthKey(Long id, Request.Refresh request) {
+//        Users user = userRepository.findByUserName(request.getUserName());
+        Users user = userRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
+
+
+        // 새로운 Key 발급
+        String newAuthKey = UUID.randomUUID().toString();
+
+        // TODO: Auth key 중복 체크 로직
+
+        user.refreshAuthKey(newAuthKey);
+
+        Response.AuthKeyInfo info = Response.AuthKeyInfo.builder()
+                .authKey(newAuthKey)
+                .build();
+
+        return info;
+    }
+
 
 }

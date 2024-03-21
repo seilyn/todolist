@@ -5,10 +5,7 @@ import com.io.todolist.account.dto.Response;
 import com.io.todolist.account.service.UserService;
 import com.io.todolist.common.dto.CommonResponse;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/app")
@@ -53,5 +50,18 @@ public class ClientController {
 
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("refresh/{id}")
+    public ResponseEntity<CommonResponse> refreshAuthKey(@PathVariable("id") Long id, @RequestBody Request.Refresh request) {
+        Response.AuthKeyInfo authKeyInfo = userService.refreshAuthKey(id, request);
+        CommonResponse response =CommonResponse.builder()
+                .success(true)
+                .response(authKeyInfo)
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
+
 
 }

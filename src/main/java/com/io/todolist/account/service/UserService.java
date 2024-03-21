@@ -7,4 +7,6 @@ public interface UserService {
     Response.UserInfo signup(Request.SignUp request);
 
     Response.Login logIn(Request.Login request);
+
+    Response.AuthKeyInfo refreshAuthKey(Long id, Request.Refresh request);
 }
