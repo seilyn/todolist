@@ -54,6 +54,10 @@ public class Users {
 
     }
 
+    /**
+     * 인증 키 갱신
+     * @param authKey
+     */
     public void refreshAuthKey(String authKey){
         this.authKey = authKey;
     }

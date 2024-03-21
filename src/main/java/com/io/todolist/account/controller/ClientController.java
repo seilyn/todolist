@@ -62,6 +62,4 @@ public class ClientController {
         return ResponseEntity.ok(response);
     }
 
-
-
 }
