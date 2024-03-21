@@ -47,6 +47,7 @@ public class UserServiceImpl implements UserService {
         }
 
         Users user = Users.builder()
+
                 .userName(request.getUsername())
                 // 비밀번호 암호화
                 .password(passwordEncoder.encode(request.getPassword()))
@@ -86,6 +87,7 @@ public class UserServiceImpl implements UserService {
          }
 
         Response.Login login = Response.Login.builder()
+                .userId(findUser.getUserId())
                 .userName(request.getUserName())
                 .build();
 

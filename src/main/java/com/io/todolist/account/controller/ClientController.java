@@ -2,6 +2,7 @@ package com.io.todolist.account.controller;
 
 import com.io.todolist.account.dto.Request;
 import com.io.todolist.account.dto.Response;
+import com.io.todolist.account.entity.Users;
 import com.io.todolist.account.service.UserService;
 import com.io.todolist.common.dto.CommonResponse;
 import org.springframework.http.ResponseEntity;
@@ -52,8 +53,10 @@ public class ClientController {
     }
 
     @PostMapping("refresh/{id}")
-    public ResponseEntity<CommonResponse> refreshAuthKey(@PathVariable("id") Long id, @RequestBody Request.Refresh request) {
-        Response.AuthKeyInfo authKeyInfo = userService.refreshAuthKey(id, request);
+    public ResponseEntity<CommonResponse> refreshAuthKey(@PathVariable("id") Users user, @RequestBody Request.Refresh request) {
+
+        Response.AuthKeyInfo authKeyInfo = userService.refreshAuthKey(user.getUserId(), request);
+
         CommonResponse response =CommonResponse.builder()
                 .success(true)
                 .response(authKeyInfo)

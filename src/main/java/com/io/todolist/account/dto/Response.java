@@ -33,7 +33,7 @@ public class Response {
     @Builder
     @Data
     public static class Login {
-
+        private Long userId;
         private String userName;
     }
 

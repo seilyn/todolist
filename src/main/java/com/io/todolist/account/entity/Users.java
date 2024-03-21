@@ -20,7 +20,7 @@ import java.util.UUID;
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+    private Long userId;
 
     @Column(name = "user_name", nullable = false)
     private String userName;
@@ -51,7 +51,6 @@ public class Users {
         this.nickname = nickname;
         this.authKey = authKey;
         this.joinedDate = joinedDate;
-
     }
 
     /**
