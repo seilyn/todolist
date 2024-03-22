@@ -1,6 +1,5 @@
 package com.io.todolist.account.repository;
 
-import com.io.todolist.account.dto.Response;
 import com.io.todolist.account.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 

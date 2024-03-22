@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -13,10 +14,13 @@ import java.util.List;
 public class Mate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long mate_id;
+    private Long id;
 
     @Column(name = "mate_name", nullable = false)
     private String mateName;
+
+    @OneToMany(mappedBy = "mate", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    private Set<Users> users;
 
 }
 

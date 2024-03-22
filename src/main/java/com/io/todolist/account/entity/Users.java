@@ -1,5 +1,6 @@
 package com.io.todolist.account.entity;
 
+import com.io.todolist.task.entity.Task;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -8,8 +9,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
-import java.util.UUID;
 
 /**
  * 추후 토큰 인증 로직 추가
@@ -42,6 +41,14 @@ public class Users {
 
     @Column(name = "joined_date")
     private Date joinedDate;
+
+    @Column(name = "have_mate")
+    private String haveMate;
+
+
+    @ManyToOne
+    @JoinColumn(name = "mates_id")
+    private Mate mate;
 
     @Builder
     public Users(String userName, String password, String emailAddress, String nickname, String authKey, Date joinedDate) {

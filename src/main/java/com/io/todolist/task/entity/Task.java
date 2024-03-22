@@ -1,9 +1,12 @@
-package com.io.todolist.account.entity;
+package com.io.todolist.task.entity;
 
+import com.io.todolist.account.entity.Mate;
+import com.io.todolist.account.entity.Users;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -15,42 +18,32 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long task_id;
 
-    @Column(nullable = false, length = 20)
-    private String title;
+    @Column(name = "contents")
     private String contents;
 
     @Column(name = "completed")
     private Boolean isCompleted;
 
     @Column(name = "deadline")
-    private LocalDateTime deadline;
+    private String deadline;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private Users user;
+
+    @Column(name = "author")
+    private String author;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mate_id")
     private Mate mate;
 
     @Builder
-    public Task( String title, String contents, Boolean isCompleted, Users user, LocalDateTime deadline) {
-        this.title = title;
+    public Task( String contents, Boolean isCompleted, String deadline, String author) {
         this.contents = contents;
         this.isCompleted = isCompleted;
-        this.user = user;
+        this.author = author;
         this.deadline = deadline;
     }
 
-    public void setContents(String contents) {
-        this.contents = contents;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDeadline(LocalDateTime parseDatetime) {
-        this.deadline = parseDatetime;
-    }
 }

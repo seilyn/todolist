@@ -1,15 +1,12 @@
 package com.io.todolist.account.service.impl;
 
-import com.io.todolist.account.dto.Request;
-import com.io.todolist.account.dto.Response;
+import com.io.todolist.account.dto.AccountReqDto;
+import com.io.todolist.account.dto.AccountResDto;
 import com.io.todolist.account.entity.Users;
 import com.io.todolist.account.repository.UserRepository;
 import com.io.todolist.account.service.UserService;
-import com.io.todolist.common.dto.CommonResponse;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +35,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional
-    public Response.UserInfo signup(Request.SignUp request) {
+    public AccountResDto.UserInfo signup(AccountReqDto.SignUp request) {
         if (userRepository.existsByUserName(request.getUsername())) {
             // TODO: 추후 Error를 컨트롤하는 ErrorResponse 로직을 구현해야 합니다.
             // 현재로서는 로그만 남기고 함수 종료
@@ -62,7 +59,7 @@ public class UserServiceImpl implements UserService {
                 request.getEmailAddress(),
                 request.getNickname() + " -> 가입 요청");
 
-        return Response.UserInfo.of(userRepository.save(user));
+        return AccountResDto.UserInfo.of(userRepository.save(user));
     }
 
 
@@ -73,7 +70,7 @@ public class UserServiceImpl implements UserService {
      * 추후에 토큰인증으로 변경할 메소드임.
      */
     @Override
-    public Response.Login logIn(Request.Login request) {
+    public AccountResDto.Login logIn(AccountReqDto.Login request) {
          Users findUser = userRepository.findByUserName(request.getUserName());
 
          if (findUser.getUserName() == null) {
@@ -86,7 +83,7 @@ public class UserServiceImpl implements UserService {
              return null;
          }
 
-        Response.Login login = Response.Login.builder()
+        AccountResDto.Login login = AccountResDto.Login.builder()
                 .userId(findUser.getUserId())
                 .userName(request.getUserName())
                 .build();
@@ -96,19 +93,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public Response.AuthKeyInfo refreshAuthKey(Long id, Request.Refresh request) {
-//        Users user = userRepository.findByUserName(request.getUserName());
+    public AccountResDto.AuthKeyInfo refreshAuthKey(Long id, AccountReqDto.Refresh request) {
         Users user = userRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
-
 
         // 새로운 Key 발급
         String newAuthKey = UUID.randomUUID().toString();
 
-        // TODO: Auth key 중복 체크 로직
+        // TODO: Auth key 중복 체크 로직 v
 
         user.refreshAuthKey(newAuthKey);
 
-        Response.AuthKeyInfo info = Response.AuthKeyInfo.builder()
+        AccountResDto.AuthKeyInfo info = AccountResDto.AuthKeyInfo.builder()
                 .authKey(newAuthKey)
                 .build();
 

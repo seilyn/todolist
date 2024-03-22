@@ -4,7 +4,7 @@ import com.io.todolist.account.entity.Users;
 import lombok.Builder;
 import lombok.Data;
 
-public class Response {
+public class AccountResDto {
     @Builder
     @Data
     public static class UserInfo {
@@ -14,7 +14,7 @@ public class Response {
 
         private String emailAddress;
 
-        public static Response.UserInfo of(Users user) {
+        public static AccountResDto.UserInfo of(Users user) {
             if (user == null) {
                 return null;
             }

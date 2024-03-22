@@ -1,12 +1,12 @@
 package com.io.todolist.account.service;
 
-import com.io.todolist.account.dto.Request;
-import com.io.todolist.account.dto.Response;
+import com.io.todolist.account.dto.AccountReqDto;
+import com.io.todolist.account.dto.AccountResDto;
 
 public interface UserService {
-    Response.UserInfo signup(Request.SignUp request);
+    AccountResDto.UserInfo signup(AccountReqDto.SignUp request);
 
-    Response.Login logIn(Request.Login request);
+    AccountResDto.Login logIn(AccountReqDto.Login request);
 
-    Response.AuthKeyInfo refreshAuthKey(Long id, Request.Refresh request);
+    AccountResDto.AuthKeyInfo refreshAuthKey(Long id, AccountReqDto.Refresh request);
 }
