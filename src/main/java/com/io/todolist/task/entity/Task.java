@@ -26,13 +26,11 @@ public class Task {
 
     @Column(name = "deadline")
     private String deadline;
-
+    @Column(name = "author")
+    private String author;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private Users user;
-
-    @Column(name = "author")
-    private String author;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mate_id")

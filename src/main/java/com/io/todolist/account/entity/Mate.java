@@ -16,10 +16,8 @@ public class Mate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "mate_name", nullable = false)
-    private String mateName;
-
     @OneToMany(mappedBy = "mate", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "mate_id")
     private Set<Users> users;
 
 }

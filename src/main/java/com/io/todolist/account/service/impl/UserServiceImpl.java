@@ -91,6 +91,12 @@ public class UserServiceImpl implements UserService {
          return login;
     }
 
+    /**
+     * 인증키 갱신
+     * @param id
+     * @param request
+     * @return AccountResDto.AuthKeyInfo ( 갱신된 인증키 반환 )
+     */
     @Override
     @Transactional
     public AccountResDto.AuthKeyInfo refreshAuthKey(Long id, AccountReqDto.Refresh request) {
