@@ -1,5 +1,6 @@
 package com.io.todolist.account.dto;
 
+import com.io.todolist.account.entity.Mate;
 import com.io.todolist.account.entity.Users;
 import lombok.Builder;
 import lombok.Data;
@@ -39,8 +40,19 @@ public class AccountResDto {
 
     @Builder
     @Data
-    public static class AuthKeyInfo {
-        private String authKey;
+    public static class MateInfo {
+
+        private String mateName;
+
+        public static AccountResDto.MateInfo of(Mate mate) {
+            if (mate == null) {
+                return null;
+            }
+
+            return MateInfo.builder()
+                    .mateName(mate.)
+                    .build();
+        }
     }
 
 

@@ -2,7 +2,9 @@ package com.io.todolist.account.service.impl;
 
 import com.io.todolist.account.dto.AccountReqDto;
 import com.io.todolist.account.dto.AccountResDto;
+import com.io.todolist.account.entity.Mate;
 import com.io.todolist.account.entity.Users;
+import com.io.todolist.account.repository.MateRepository;
 import com.io.todolist.account.repository.UserRepository;
 import com.io.todolist.account.service.UserService;
 import jakarta.transaction.Transactional;
@@ -10,22 +12,23 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.NoSuchElementException;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
+    private final MateRepository mateRepository;
 
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
 
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, PasswordEncoder passwordEncoder1) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, PasswordEncoder passwordEncoder1,
+                           MateRepository mateRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder1;
+        this.mateRepository = mateRepository;
     }
 
     /**
@@ -50,8 +53,8 @@ public class UserServiceImpl implements UserService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .emailAddress(request.getEmailAddress())
                 .nickname(request.getNickname())
+                .haveMate(false)
                 .joinedDate(new Date())
-                .authKey(UUID.randomUUID().toString())
                 .build();
 
         log.info(request.getUsername(),
@@ -91,29 +94,26 @@ public class UserServiceImpl implements UserService {
          return login;
     }
 
-    /**
-     * 인증키 갱신
-     * @param id
-     * @param request
-     * @return AccountResDto.AuthKeyInfo ( 갱신된 인증키 반환 )
-     */
     @Override
-    @Transactional
-    public AccountResDto.AuthKeyInfo refreshAuthKey(Long id, AccountReqDto.Refresh request) {
-        Users user = userRepository.findById(id).orElseThrow(() -> new NoSuchElementException());
+    public AccountResDto.MateInfo createMate(AccountReqDto.CreateMate request) {
 
-        // 새로운 Key 발급
-        String newAuthKey = UUID.randomUUID().toString();
+        // 만드는 유저의 이름을 가져옴.
+        Users leader = userRepository.findByUserName(request.getUserName());
 
-        // TODO: Auth key 중복 체크 로직 v
+        // Set에 추가 함.
+        Set<Users> usersSet = new HashSet<>();
+        usersSet.add(leader);
 
-        user.refreshAuthKey(newAuthKey);
 
-        AccountResDto.AuthKeyInfo info = AccountResDto.AuthKeyInfo.builder()
-                .authKey(newAuthKey)
+        Mate mate = Mate.builder()
+                .inviteKey(UUID.randomUUID().toString())
+                .mateName(request.getMateName())
+                .leaderName(request.getUserName())
+                .users(usersSet)
                 .build();
 
-        return info;
+        return AccountResDto.MateInfo.of(mateRepository.save(mate));
+
     }
 
 

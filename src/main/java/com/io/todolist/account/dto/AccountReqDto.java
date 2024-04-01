@@ -48,8 +48,11 @@ public class AccountReqDto {
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class Refresh {
+    public static class CreateMate {
         @NotNull
         private String userName;
+
+        @NotNull
+        private String mateName;
     }
 }

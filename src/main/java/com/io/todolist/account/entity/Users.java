@@ -36,35 +36,23 @@ public class Users {
     @OneToMany(mappedBy = "user")
     private List<Task> taskList;
 
-    @Column(name = "auth_key")
-    private String authKey;
-
     @Column(name = "joined_date")
     private Date joinedDate;
 
     @Column(name = "have_mate")
-    private String haveMate;
-
+    private Boolean haveMate;
 
     @ManyToOne
     @JoinColumn(name = "mates_id")
     private Mate mate;
 
     @Builder
-    public Users(String userName, String password, String emailAddress, String nickname, String authKey, Date joinedDate) {
+    public Users(String userName, String password, String emailAddress, String nickname, Date joinedDate, Boolean haveMate) {
         this.userName = userName;
         this.password = password;
         this.emailAddress = emailAddress;
         this.nickname = nickname;
-        this.authKey = authKey;
         this.joinedDate = joinedDate;
-    }
-
-    /**
-     * 인증 키 갱신
-     * @param authKey
-     */
-    public void refreshAuthKey(String authKey){
-        this.authKey = authKey;
+        this.haveMate = haveMate;
     }
 }

@@ -52,23 +52,5 @@ public class AccountController {
         return ResponseEntity.ok(response);
     }
 
-    /**
-     * 인증키 갱신
-     * @param user
-     * @param request
-     * @return
-     */
-    @PostMapping("refresh/{id}")
-    public ResponseEntity<CommonResponse> refreshAuthKey(@PathVariable("id") Users user, @RequestBody AccountReqDto.Refresh request) {
-
-        AccountResDto.AuthKeyInfo authKeyInfo = userService.refreshAuthKey(user.getUserId(), request);
-
-        CommonResponse response = CommonResponse.builder()
-                .success(true)
-                .response(authKeyInfo)
-                .build();
-
-        return ResponseEntity.ok(response);
-    }
 
 }

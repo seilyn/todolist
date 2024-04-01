@@ -8,5 +8,5 @@ public interface UserService {
 
     AccountResDto.Login logIn(AccountReqDto.Login request);
 
-    AccountResDto.AuthKeyInfo refreshAuthKey(Long id, AccountReqDto.Refresh request);
+    AccountResDto.MateInfo createMate(AccountReqDto.CreateMate request);
 }
