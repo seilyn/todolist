@@ -1,6 +1,6 @@
-package com.io.todolist.account.repository;
+package com.io.todolist.infrasturcture.persistence;
 
-import com.io.todolist.account.entity.Users;
+import com.io.todolist.domain.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<Users, Long> {

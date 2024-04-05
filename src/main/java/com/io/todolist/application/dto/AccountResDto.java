@@ -1,7 +1,6 @@
-package com.io.todolist.account.dto;
+package com.io.todolist.application.dto;
 
-import com.io.todolist.account.entity.Mate;
-import com.io.todolist.account.entity.Users;
+import com.io.todolist.domain.Users;
 import lombok.Builder;
 import lombok.Data;
 
@@ -38,22 +37,7 @@ public class AccountResDto {
         private String userName;
     }
 
-    @Builder
-    @Data
-    public static class MateInfo {
 
-        private String mateName;
-
-        public static AccountResDto.MateInfo of(Mate mate) {
-            if (mate == null) {
-                return null;
-            }
-
-            return MateInfo.builder()
-                    .mateName(mate.)
-                    .build();
-        }
-    }
 
 
 }

@@ -1,12 +1,12 @@
-package com.io.todolist.task.service.impl;
+package com.io.todolist.application.service.impl;
 
-import com.io.todolist.account.entity.Users;
-import com.io.todolist.account.repository.UserRepository;
-import com.io.todolist.task.dto.TaskReqDto;
-import com.io.todolist.task.dto.TaskResDto;
-import com.io.todolist.task.entity.Task;
-import com.io.todolist.task.repository.TaskRepository;
-import com.io.todolist.task.service.TaskService;
+import com.io.todolist.domain.Users;
+import com.io.todolist.infrasturcture.persistence.UserRepository;
+import com.io.todolist.application.dto.TaskReqDto;
+import com.io.todolist.application.dto.TaskResDto;
+import com.io.todolist.domain.Task;
+import com.io.todolist.infrasturcture.persistence.TaskRepository;
+import com.io.todolist.application.service.TaskService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package com.io.todolist.account.dto;
+package com.io.todolist.application.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,15 +44,5 @@ public class AccountReqDto {
 
     }
 
-    @Builder
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class CreateMate {
-        @NotNull
-        private String userName;
 
-        @NotNull
-        private String mateName;
-    }
 }

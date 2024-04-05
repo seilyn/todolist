@@ -1,4 +1,4 @@
-package com.io.todolist.task.dto;
+package com.io.todolist.application.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,7 +1,8 @@
-package com.io.todolist.account.repository;
+package com.io.todolist.infrasturcture.persistence;
 
-import com.io.todolist.account.entity.Mate;
+import com.io.todolist.domain.Mate;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MateRepository extends JpaRepository<Mate, Long> {
+    Mate findByMateName(String mateName);
 }

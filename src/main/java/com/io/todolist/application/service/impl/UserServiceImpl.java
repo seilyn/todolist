@@ -1,12 +1,11 @@
-package com.io.todolist.account.service.impl;
+package com.io.todolist.application.service.impl;
 
-import com.io.todolist.account.dto.AccountReqDto;
-import com.io.todolist.account.dto.AccountResDto;
-import com.io.todolist.account.entity.Mate;
-import com.io.todolist.account.entity.Users;
-import com.io.todolist.account.repository.MateRepository;
-import com.io.todolist.account.repository.UserRepository;
-import com.io.todolist.account.service.UserService;
+import com.io.todolist.application.dto.AccountReqDto;
+import com.io.todolist.application.dto.AccountResDto;
+import com.io.todolist.domain.Users;
+import com.io.todolist.infrasturcture.persistence.MateRepository;
+import com.io.todolist.infrasturcture.persistence.UserRepository;
+import com.io.todolist.application.service.UserService;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -94,27 +93,7 @@ public class UserServiceImpl implements UserService {
          return login;
     }
 
-    @Override
-    public AccountResDto.MateInfo createMate(AccountReqDto.CreateMate request) {
 
-        // 만드는 유저의 이름을 가져옴.
-        Users leader = userRepository.findByUserName(request.getUserName());
-
-        // Set에 추가 함.
-        Set<Users> usersSet = new HashSet<>();
-        usersSet.add(leader);
-
-
-        Mate mate = Mate.builder()
-                .inviteKey(UUID.randomUUID().toString())
-                .mateName(request.getMateName())
-                .leaderName(request.getUserName())
-                .users(usersSet)
-                .build();
-
-        return AccountResDto.MateInfo.of(mateRepository.save(mate));
-
-    }
 
 
 }

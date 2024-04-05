@@ -1,12 +1,8 @@
-package com.io.todolist.task.dto;
+package com.io.todolist.application.dto;
 
-import com.io.todolist.account.dto.AccountResDto;
-import com.io.todolist.account.entity.Users;
-import com.io.todolist.task.entity.Task;
+import com.io.todolist.domain.Task;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.Date;
 
 public class TaskResDto {
     @Builder

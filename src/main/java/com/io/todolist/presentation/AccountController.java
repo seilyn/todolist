@@ -1,9 +1,8 @@
-package com.io.todolist.account.controller;
+package com.io.todolist.presentation;
 
-import com.io.todolist.account.dto.AccountReqDto;
-import com.io.todolist.account.dto.AccountResDto;
-import com.io.todolist.account.entity.Users;
-import com.io.todolist.account.service.UserService;
+import com.io.todolist.application.dto.AccountReqDto;
+import com.io.todolist.application.dto.AccountResDto;
+import com.io.todolist.application.service.UserService;
 import com.io.todolist.common.dto.CommonResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,12 +1,9 @@
-package com.io.todolist.task.entity;
+package com.io.todolist.domain;
 
-import com.io.todolist.account.entity.Mate;
-import com.io.todolist.account.entity.Users;
+import com.io.todolist.domain.Mate;
+import com.io.todolist.domain.Users;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Getter

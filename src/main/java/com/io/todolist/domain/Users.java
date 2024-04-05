@@ -1,6 +1,5 @@
-package com.io.todolist.account.entity;
+package com.io.todolist.domain;
 
-import com.io.todolist.task.entity.Task;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;

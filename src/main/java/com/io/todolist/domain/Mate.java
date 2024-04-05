@@ -1,9 +1,9 @@
-package com.io.todolist.account.entity;
+package com.io.todolist.domain;
 
+import com.io.todolist.domain.Users;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,7 +26,6 @@ public class Mate {
     private String mateName;
 
     @OneToMany(mappedBy = "mate", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    @JoinColumn(name = "mate_id")
     private Set<Users> users;
 
 }
