@@ -3,7 +3,6 @@ package com.io.todolist;
 import com.io.todolist.application.dto.AccountReqDto;
 import com.io.todolist.application.dto.AccountResDto;
 import com.io.todolist.infrasturcture.persistence.UserRepository;
-import com.io.todolist.application.service.UserService;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;

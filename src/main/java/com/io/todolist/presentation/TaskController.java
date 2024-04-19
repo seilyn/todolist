@@ -1,10 +1,10 @@
 package com.io.todolist.presentation;
 
+import com.io.todolist.application.service.TaskService;
 import com.io.todolist.common.dto.CommonResponse;
 import com.io.todolist.application.dto.TaskReqDto;
 import com.io.todolist.application.dto.TaskResDto;
 import com.io.todolist.domain.Task;
-import com.io.todolist.application.service.TaskService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

@@ -4,6 +4,8 @@ import com.io.todolist.domain.Users;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -11,22 +13,29 @@ import java.util.Set;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class Mate {
+@Table(name = "mate")
+public class Mate extends BaseTimeStamp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long mate_id;
 
-    @Column(name = "leader")
+    /**
+     *
+     */
+    @Column(name = "leader_name")
     private String leaderName;
 
-    @Column(name = "invite_key")
-    private String inviteKey;
+    /**
+     * Mate 비밀번호
+     */
+    @Column(name = "password")
+    private String password;
 
+    /**
+     * Mate 이름
+     */
     @Column(name = "mate_name")
     private String mateName;
-
-    @OneToMany(mappedBy = "mate", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    private Set<Users> users;
 
 }
 

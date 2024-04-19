@@ -2,12 +2,12 @@ package com.io.todolist;
 
 import com.io.todolist.application.dto.AccountReqDto;
 import com.io.todolist.application.dto.AccountResDto;
-import com.io.todolist.application.service.UserService;
 import com.io.todolist.application.dto.MateReqDto;
 import com.io.todolist.application.dto.MateResDto;
+import com.io.todolist.application.service.MateService;
+import com.io.todolist.application.service.UserService;
 import com.io.todolist.domain.Mate;
 import com.io.todolist.infrasturcture.persistence.MateRepository;
-import com.io.todolist.application.service.MateService;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
