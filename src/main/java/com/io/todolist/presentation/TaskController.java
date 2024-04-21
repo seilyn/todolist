@@ -1,7 +1,7 @@
 package com.io.todolist.presentation;
 
 import com.io.todolist.application.service.TaskService;
-import com.io.todolist.common.dto.CommonResponse;
+import com.io.todolist.application.dto.CommonResDto;
 import com.io.todolist.application.dto.TaskReqDto;
 import com.io.todolist.application.dto.TaskResDto;
 import com.io.todolist.domain.Task;
@@ -27,10 +27,10 @@ public class TaskController {
      * @return
      */
     @PostMapping("/tasks/{id}")
-    public ResponseEntity<CommonResponse> addTasks (@PathVariable Long id, @RequestBody TaskReqDto.AddTasks request) {
+    public ResponseEntity<CommonResDto> addTasks (@PathVariable Long id, @RequestBody TaskReqDto.AddTasks request) {
         TaskResDto.TaskInfo taskInfo = taskService.addTasks(id, request);
 
-        CommonResponse response = CommonResponse.builder()
+        CommonResDto response = CommonResDto.builder()
                 .success(true)
                 .response(taskInfo)
                 .build();
@@ -39,14 +39,16 @@ public class TaskController {
     }
 
     @GetMapping("/tasks/{id}")
-    public ResponseEntity<CommonResponse> getTasks(@PathVariable Long id) {
-        List<Task> taskList = taskService.getTasks(id);
+    public ResponseEntity<CommonResDto> getTasks(@PathVariable Long id) {
+        List<Task> taskList = taskService.getTasksForUser(id);
 
-        CommonResponse response = CommonResponse.builder()
+        CommonResDto response = CommonResDto.builder()
                 .success(true)
                 .response(taskList)
                 .build();
 
         return ResponseEntity.ok(response);
     }
+
+
 }

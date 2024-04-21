@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mariadb://localhost:3306/todolist
+    url: jdbc:mariadb://localhost:3306/tl
     driver-class-name: org.mariadb.jdbc.Driver
     username: root
     password: root

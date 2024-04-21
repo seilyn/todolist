@@ -1,6 +1,5 @@
 package com.io.todolist.domain;
 
-import com.io.todolist.domain.Users;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,30 +11,27 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Builder
-@Table(name = "mate")
-public class Mate extends BaseTimeStamp {
+public class Mate extends BaseTimeStamp{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long mate_id;
-
-    /**
-     *
-     */
-    @Column(name = "leader_name")
-    private String leaderName;
-
-    /**
-     * Mate 비밀번호
-     */
-    @Column(name = "password")
-    private String password;
-
+    private Long id;
     /**
      * Mate 이름
      */
     @Column(name = "mate_name")
     private String mateName;
 
-}
+    @Column(name = "invite_key")
+    private String inviteKey;
 
+    @OneToMany(mappedBy = "mate")
+    private List<MateUser> mateUsers = new ArrayList<>();
+
+    @Builder
+    public Mate(Long id, String mateName, String inviteKey) {
+        this.id = id;
+        this.mateName = mateName;
+        this.inviteKey = inviteKey;
+    }
+}

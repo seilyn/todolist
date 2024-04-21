@@ -1,11 +1,11 @@
-package com.io.todolist.common.dto;
+package com.io.todolist.application.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 
 @Builder
 @Getter
-public class ErrorResponse {
+public class ErrorResDto {
     private String code;
 
     private String message;

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.List;
 public class Users extends BaseTimeStamp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+    private Long id;
 
     /**
      * 유저명
@@ -53,29 +54,21 @@ public class Users extends BaseTimeStamp {
     private boolean activated;
 
     /**
-     * 소속그룹
+     * Task 리스트
      */
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "mate_id", nullable = true, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private Mate mate;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> tasks = new ArrayList<>();
 
 
-    /**
-     * Constructor
-     * @param userName
-     * @param password
-     * @param emailAddress
-     * @param nickname
-     * @param activated
-     * @param mate
-     */
+    @OneToMany(mappedBy = "user")
+    private List<MateUser> mateUsers = new ArrayList<>();
     @Builder
-    public Users(String userName, String password, String emailAddress, String nickname, boolean activated, Mate mate) {
+    public Users(String userName, String password, String emailAddress, String nickname, boolean activated) {
         this.userName = userName;
         this.password = password;
         this.emailAddress = emailAddress;
         this.nickname = nickname;
         this.activated = activated;
-        this.mate = mate;
     }
+
 }

@@ -1,5 +1,4 @@
 package com.io.todolist.application.dto;
-
 import com.io.todolist.domain.Mate;
 import lombok.Builder;
 import lombok.Data;

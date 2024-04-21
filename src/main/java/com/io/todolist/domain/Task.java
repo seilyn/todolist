@@ -1,20 +1,22 @@
 package com.io.todolist.domain;
 
-import com.io.todolist.domain.Mate;
-import com.io.todolist.domain.Users;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.expression.spel.ast.Assign;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Table(indexes = @Index(columnList = "task_id", name = "idx_task_id"))
+@Table(indexes = @Index(columnList = "id", name = "idx_task_id"))
 public class Task extends BaseTimeStamp{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long task_id;
+    private Long id;
 
     /**
      * Task 내용
@@ -40,16 +42,17 @@ public class Task extends BaseTimeStamp{
     @Column(name = "author")
     private String author;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private Users user;
 
     @Builder
-    public Task( String contents, Boolean isCompleted, String deadline, String author) {
+    public Task(String contents, Boolean isCompleted, String deadline, String author, Users user) {
         this.contents = contents;
         this.isCompleted = isCompleted;
         this.author = author;
         this.deadline = deadline;
+        this.user = user;
     }
 
 }

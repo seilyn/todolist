@@ -3,7 +3,7 @@ package com.io.todolist.presentation;
 import com.io.todolist.application.dto.AccountReqDto;
 import com.io.todolist.application.dto.AccountResDto;
 import com.io.todolist.application.service.UserService;
-import com.io.todolist.common.dto.CommonResponse;
+import com.io.todolist.application.dto.CommonResDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,10 +23,10 @@ public class AccountController {
      * @return
      */
     @PostMapping("/users")
-    public ResponseEntity<CommonResponse> signup(@RequestBody AccountReqDto.SignUp request) {
+    public ResponseEntity<CommonResDto> signup(@RequestBody AccountReqDto.SignUp request) {
         AccountResDto.UserInfo userInfo = userService.signup(request);
 
-        CommonResponse response = CommonResponse.builder()
+        CommonResDto response = CommonResDto.builder()
                 .success(true)
                 .response(userInfo)
                 .build();
@@ -40,16 +40,18 @@ public class AccountController {
      * @return
      */
     @PostMapping("/login")
-    public ResponseEntity<CommonResponse> login(@RequestBody AccountReqDto.Login request) {
+    public ResponseEntity<CommonResDto> login(@RequestBody AccountReqDto.Login request) {
         AccountResDto.Login loginInfo = userService.logIn(request);
 
-        CommonResponse response =CommonResponse.builder()
+        CommonResDto response = CommonResDto.builder()
                 .success(true)
                 .response(loginInfo)
                 .build();
 
         return ResponseEntity.ok(response);
     }
+
+
 
 
 }

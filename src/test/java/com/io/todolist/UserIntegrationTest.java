@@ -2,6 +2,8 @@ package com.io.todolist;
 
 import com.io.todolist.application.dto.AccountReqDto;
 import com.io.todolist.application.dto.AccountResDto;
+import com.io.todolist.application.service.UserService;
+import com.io.todolist.domain.Users;
 import com.io.todolist.infrasturcture.persistence.UserRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.DisplayName;
@@ -63,6 +65,12 @@ class UserIntegrationTest {
         AccountResDto.Login response = userService.logIn(request);
 
         assertThat(response.getUserName()).isEqualTo(request.getUserName());
+    }
+
+    @Test
+    @DisplayName("매칭테스트")
+    void UserMatching_Test() {
+
     }
 
 

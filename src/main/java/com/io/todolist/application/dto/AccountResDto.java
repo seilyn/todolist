@@ -14,6 +14,8 @@ public class AccountResDto {
 
         private String emailAddress;
 
+        private String inviteKey;
+
         public static AccountResDto.UserInfo of(Users user) {
             if (user == null) {
                 return null;

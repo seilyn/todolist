@@ -14,6 +14,7 @@ public class TaskReqDto {
     @AllArgsConstructor
     public static class AddTasks {
         private Long id;
+
         private String contents;
 
         private String author;

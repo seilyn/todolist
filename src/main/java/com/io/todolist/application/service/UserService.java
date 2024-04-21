@@ -2,29 +2,33 @@ package com.io.todolist.application.service;
 
 import com.io.todolist.application.dto.AccountReqDto;
 import com.io.todolist.application.dto.AccountResDto;
+import com.io.todolist.domain.Task;
 import com.io.todolist.domain.Users;
-import com.io.todolist.infrasturcture.persistence.MateRepository;
+import com.io.todolist.infrasturcture.persistence.TaskRepository;
 import com.io.todolist.infrasturcture.persistence.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.UUID;
+
 @Service
 @Slf4j
 public class UserService {
-    private final MateRepository mateRepository;
 
     private final UserRepository userRepository;
 
+
+    private final TaskRepository taskRepository;
     private final PasswordEncoder passwordEncoder;
 
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, PasswordEncoder passwordEncoder1,
-                       MateRepository mateRepository) {
+    public UserService(UserRepository userRepository, TaskRepository taskRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder1;
-        this.mateRepository = mateRepository;
+        this.taskRepository = taskRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
@@ -45,7 +49,6 @@ public class UserService {
 
                 .userName(request.getUsername())
                 .activated(true)
-
                 // 비밀번호 암호화
                 .password(passwordEncoder.encode(request.getPassword()))
                 .emailAddress(request.getEmailAddress())
@@ -81,11 +84,16 @@ public class UserService {
          }
 
         AccountResDto.Login login = AccountResDto.Login.builder()
-                .userId(findUser.getUser_id())
+                .userId(findUser.getId())
                 .userName(request.getUserName())
                 .build();
 
          return login;
+    }
+
+    @Transactional
+    public void shareTasks(String inviteKey, Long userId) {
+
     }
 
 

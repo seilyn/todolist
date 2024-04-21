@@ -17,6 +17,17 @@ public class MateReqDto {
         private String userName;
 
         @NotNull
+        private String userId;
+
+        @NotNull
         private String mateName;
+    }
+    @Builder
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class JoinMate {
+        @NotNull
+        private String inviteKey;
     }
 }

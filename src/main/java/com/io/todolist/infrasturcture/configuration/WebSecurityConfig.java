@@ -1,4 +1,4 @@
-package com.io.todolist.common.configuration;
+package com.io.todolist.infrasturcture.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
