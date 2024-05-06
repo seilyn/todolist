@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 추후 토큰 인증 로직 추가
@@ -56,12 +57,12 @@ public class Users extends BaseTimeStamp {
     /**
      * Task 리스트
      */
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Task> tasks = new ArrayList<>();
-
+    @OneToMany(mappedBy = "user")
+    private List<UserTask> userTasks = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     private List<MateUser> mateUsers = new ArrayList<>();
+
     @Builder
     public Users(String userName, String password, String emailAddress, String nickname, boolean activated) {
         this.userName = userName;

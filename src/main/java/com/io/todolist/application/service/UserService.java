@@ -19,8 +19,6 @@ import java.util.UUID;
 public class UserService {
 
     private final UserRepository userRepository;
-
-
     private final TaskRepository taskRepository;
     private final PasswordEncoder passwordEncoder;
 

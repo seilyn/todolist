@@ -80,5 +80,4 @@ public class MateService {
         mateUser.setUser(user);
         mateUserRepository.save(mateUser);
     }
-
 }

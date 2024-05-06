@@ -33,23 +33,31 @@ class UserIntegrationTest {
         /*
         Given
          */
-        AccountReqDto.SignUp request = AccountReqDto.SignUp.builder()
-                .username("testuser1")
-                .nickname("test")
-                .password("test")
+        AccountReqDto.SignUp request1 = AccountReqDto.SignUp.builder()
+                .username("테스트1")
+                .nickname("test1")
+                .password("test1")
                 .emailAddress("test@test.com")
+                .build();
+
+        AccountReqDto.SignUp request2 = AccountReqDto.SignUp.builder()
+                .username("테스트2")
+                .nickname("test2")
+                .password("test2")
+                .emailAddress("test2@test.com")
                 .build();
         /*
         when
          */
-        AccountResDto.UserInfo response = userService.signup(request);
+        AccountResDto.UserInfo response = userService.signup(request1);
+        AccountResDto.UserInfo response2 = userService.signup(request2);
 
         /*
         then
          */
-        assertThat(response.getUserName()).isEqualTo(request.getUsername());
-        assertThat(response.getNickname()).isEqualTo(request.getNickname());
-        assertThat(response.getEmailAddress()).isEqualTo(request.getEmailAddress());
+        assertThat(response.getUserName()).isEqualTo(request1.getUsername());
+        assertThat(response.getNickname()).isEqualTo(request1.getNickname());
+        assertThat(response.getEmailAddress()).isEqualTo(request1.getEmailAddress());
     }
 
 
@@ -58,8 +66,8 @@ class UserIntegrationTest {
     @Order(2)
     void UserLogin_Test() {
         AccountReqDto.Login request = AccountReqDto.Login.builder()
-                .userName("testuser1")
-                .password("test")
+                .userName("테스트1")
+                .password("test1")
                 .build();
 
         AccountResDto.Login response = userService.logIn(request);
@@ -67,11 +75,6 @@ class UserIntegrationTest {
         assertThat(response.getUserName()).isEqualTo(request.getUserName());
     }
 
-    @Test
-    @DisplayName("매칭테스트")
-    void UserMatching_Test() {
-
-    }
 
 
 

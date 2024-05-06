@@ -25,10 +25,10 @@ public class MateIntegrationTest {
 //    @Autowired
 //    private MateRepository mateRepository;
 
-    @Order(1)
-    @Test
-    @DisplayName("Mate 생성 테스트")
-    void Create_Mate_Test() {
+//    @Order(1)
+//    @Test
+//    @DisplayName("Mate 생성 테스트")
+//    void Create_Mate_Test() {
 //
 //        AccountReqDto.SignUp request = AccountReqDto.SignUp.builder()
 //                .username("mate_test")
@@ -55,5 +55,5 @@ public class MateIntegrationTest {
 //
 ////        System.out.println(mateInfo.getMateName(), matein);
 
-    }
+//    }
 }

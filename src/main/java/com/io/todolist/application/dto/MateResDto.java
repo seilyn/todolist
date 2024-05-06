@@ -9,6 +9,7 @@ public class MateResDto {
     public static class MateInfo {
 
         private String mateName;
+        private String inviteKey;
 
         public static MateResDto.MateInfo of(Mate mate) {
             if (mate == null) {
@@ -17,6 +18,7 @@ public class MateResDto {
 
             return MateInfo.builder()
                     .mateName(mate.getMateName())
+                    .inviteKey(mate.getInviteKey())
                     .build();
         }
     }

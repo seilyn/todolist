@@ -42,17 +42,16 @@ public class Task extends BaseTimeStamp{
     @Column(name = "author")
     private String author;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private Users user;
+    @OneToMany(mappedBy = "task")
+    private List<UserTask> userTasks = new ArrayList<>();
+
 
     @Builder
-    public Task(String contents, Boolean isCompleted, String deadline, String author, Users user) {
+    public Task(String contents, Boolean isCompleted, String deadline, String author) {
         this.contents = contents;
         this.isCompleted = isCompleted;
         this.author = author;
         this.deadline = deadline;
-        this.user = user;
     }
 
 }
