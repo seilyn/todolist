@@ -1,18 +1,13 @@
 package com.io.todolist.application.service;
 
 import com.io.todolist.domain.*;
-import com.io.todolist.infrasturcture.persistence.MateUserRepository;
-import com.io.todolist.infrasturcture.persistence.UserRepository;
+import com.io.todolist.infrasturcture.persistence.*;
 import com.io.todolist.application.dto.TaskReqDto;
 import com.io.todolist.application.dto.TaskResDto;
-import com.io.todolist.infrasturcture.persistence.TaskRepository;
-import com.io.todolist.infrasturcture.persistence.UserTaskRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class TaskService {
@@ -21,17 +16,21 @@ public class TaskService {
     private final TaskRepository taskRepository;
     private final MateUserRepository mateUserRepository;
 
+    private final MateRepository mateRepository;
+
     private final UserTaskRepository userTaskRepository;
+
     public TaskService(UserRepository userRepository,
-                       TaskRepository taskRepository, MateUserRepository mateUserRepository, UserTaskRepository userTaskRepository) {
+                       TaskRepository taskRepository, MateUserRepository mateUserRepository, MateRepository mateRepository, UserTaskRepository userTaskRepository) {
         this.userRepository = userRepository;
         this.taskRepository = taskRepository;
         this.mateUserRepository = mateUserRepository;
+        this.mateRepository = mateRepository;
         this.userTaskRepository = userTaskRepository;
     }
 
     @Transactional
-    public TaskResDto.TaskInfo addTasks(Long id, TaskReqDto.AddTasks request) throws RuntimeException{
+    public TaskResDto.TaskInfo addTasks(Long id, TaskReqDto.AddTasks request) throws RuntimeException {
 
         Users user = userRepository.findById(id).orElseThrow(() -> new RuntimeException());
 
@@ -56,20 +55,30 @@ public class TaskService {
         return taskRepository.findAllById(Collections.singleton(id));
     }
 
+    @Transactional
+
     public List<Task> getTasksForUser(Long userId) {
-        // 사용자 조회
-        Users user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("사용자를 찾을 수 없습니다."));
+        // 1. 사용자 ID로 속한 Mate 가져오기
+        List<MateUser> mateUserList = mateUserRepository.findMateByUserId(userId);
 
-        // 사용자의 작업을 저장할 리스트
-        List<Task> tasks = new ArrayList<>();
+        // 사용자의 모든 작업을 저장할 리스트
+        Set<Long> taskIdList = new HashSet<>();
 
-        // 사용자가 속한 그룹 조회
-        List<MateUser> mateUsers = mateUserRepository.findByUser(user);
+        for (MateUser mateUser : mateUserList) {
+            // 2. 각 Mate에 속한 모든 사용자의 ID 가져오기
+            List<Long> mateUserIdSet = mateUserRepository.findUserIdsByMateId(mateUser.getMate().getId());
 
+            for (Long mateUserId : mateUserIdSet) {
+                // 3. 각 사용자 ID로 해당 사용자의 모든 작업 가져오기
+                List<Long> idList = userTaskRepository.findUserTasksByUserId(mateUserId);
+                taskIdList.addAll(idList);
+            }
+        }
 
+        List<Task> taskList = taskRepository.findByIdIn(taskIdList);
 
-        return tasks;
+        return taskList;
     }
+
 
 }

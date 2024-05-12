@@ -1,5 +1,6 @@
 package com.io.todolist.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -58,10 +59,10 @@ public class Users extends BaseTimeStamp {
      * Task 리스트
      */
     @OneToMany(mappedBy = "user")
-    private List<UserTask> userTasks = new ArrayList<>();
+    private List<UserTask> userTasks;
 
     @OneToMany(mappedBy = "user")
-    private List<MateUser> mateUsers = new ArrayList<>();
+    private List<MateUser> mateUsers;
 
     @Builder
     public Users(String userName, String password, String emailAddress, String nickname, boolean activated) {

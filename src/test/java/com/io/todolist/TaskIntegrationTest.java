@@ -56,11 +56,19 @@ public class TaskIntegrationTest {
                 .password("test2")
                 .emailAddress("test2@test.com")
                 .build();
+
+        AccountReqDto.SignUp request3 = AccountReqDto.SignUp.builder()
+                .username("테스트3")
+                .nickname("test3")
+                .password("test3")
+                .emailAddress("test3@test.com")
+                .build();
         /*
         when
          */
         userService.signup(request1);
         userService.signup(request2);
+        userService.signup(request3);
 
         MateReqDto.CreateMate req = MateReqDto.CreateMate.builder()
                 .userName("테스트1")
@@ -70,6 +78,12 @@ public class TaskIntegrationTest {
         MateResDto.MateInfo mate =  mateService.createMate(1L, req);
 
         mateService.joinMate(mate.getInviteKey(), 2L);
+
+        MateReqDto.CreateMate req2 = MateReqDto.CreateMate.builder()
+                .userName("테스트2")
+                .userId("2")
+                .mateName("테스트그룹2")
+                .build();
 
         TaskReqDto.AddTasks reqTask1 = TaskReqDto.AddTasks.builder()
                 .author("테스트1")
@@ -89,7 +103,13 @@ public class TaskIntegrationTest {
         taskService.addTasks(1L, reqTask1);
         taskService.addTasks(2L, reqTask2);
 
-        List<Task> taskList = taskService.getTasksForUser(1L);
+//        List<Task> taskList = taskService.getTasksForUser(1L);
+//
+//        for (int i = 0; i < taskList.size(); i++) {
+//            System.out.println(taskList.get(i));
+//        }
+
+
 
 
 

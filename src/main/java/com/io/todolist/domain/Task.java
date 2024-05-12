@@ -1,5 +1,6 @@
 package com.io.todolist.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.expression.spel.ast.Assign;
@@ -42,6 +43,7 @@ public class Task extends BaseTimeStamp{
     @Column(name = "author")
     private String author;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "task")
     private List<UserTask> userTasks = new ArrayList<>();
 
